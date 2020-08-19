@@ -24,7 +24,7 @@ if __name__ == "__main__":
     if os.path.exists(repo_path):
         workspace_notebook_path = "{}/{}".format(repo_path, notebook_path)
         logging.info("workspace notebook path:", workspace_notebook_path)
-        run_notebook(workspace_notebook_path)
+        notebook_utils.run_notebook(workspace_notebook_path)
 
         notebook_output_file = "{}/test_out.txt".format(repo_path)
         with open(notebook_output_file) as f:
