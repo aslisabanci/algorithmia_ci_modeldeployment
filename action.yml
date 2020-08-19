@@ -1,0 +1,31 @@
+# action.yml
+name: "Deploy Model to Algorithmia"
+description: "TBD"
+branding:
+  icon: "alert-circle"
+  color: "yellow"
+inputs:
+  algorithmia_api_key:
+    description: "Algorithmia API key"
+    required: true
+  current_repo:
+    description: "Repo path to be used by actions/checkout@v2, to mount the workflow workspace to /github/workspace/"
+    required: true
+  model_file_path:
+    description: "TBD"
+    required: true
+  remote_upload_path:
+    description: "TBD"
+    required: true
+  notebook_path:
+    description: "Path of the notebook to be executed by this action"
+    required: false
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.algorithmia_api_key }}
+    - ${{ inputs.current_repo }}
+    - ${{ inputs.model_file_path }}
+    - ${{ inputs.remote_upload_path }}
+    - ${{ inputs.notebook_path }}

@@ -1,0 +1,18 @@
+from ubuntu:16.04
+
+
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-setuptools \
+    python3-pip
+
+
+RUN pip3 install algorithmia&& \
+    pip3 install algorithmia-api-client&& \
+    pip3 install jupyterlab&& \
+    pip3 install requests
+
+COPY entrypoint.py /entrypoint.py
+COPY action_src /action_src
+RUN chmod +x /entrypoint.py
+ENTRYPOINT ["/entrypoint.py"]
