@@ -1,8 +1,9 @@
 import subprocess
+import logging
 
 
 def run_notebook(path):
     result = subprocess.run(
         ["jupyter", "nbconvert", "--to notebook", "--execute", path]
     )
-    print(f"subprocess run result: {result}")
+    logging.info("subprocess run result:", result)
