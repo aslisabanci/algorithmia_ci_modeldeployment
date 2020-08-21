@@ -7,6 +7,6 @@ def upload_model(api_key, local_path, remote_path, model_name):
     if not algo_client.dir(remote_path).exists():
         algo_client.dir(remote_path).create()
     full_path = "{}/{}".format(remote_path, model_name)
-    result = self.algo_client.file(full_path).putFile(local_path)
+    result = algo_client.file(full_path).putFile(local_path)
     # TODO: Act on the result object, have a return value
     print(result)
