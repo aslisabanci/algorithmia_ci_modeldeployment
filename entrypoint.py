@@ -28,13 +28,15 @@ if __name__ == "__main__":
         )
 
         test_output_path = "{}/test_out.txt".format(repo_path)
+        test_model_name = "autodeployed_model.pkl"
+        test_model_output_path = "{}/model/{}".format(repo_path, test_model_name)
         with open(test_output_path) as f:
             test_file_contents = f.read()
             print(test_file_contents)
 
         remote_path = "data://asli/automated_deploy"
         algorithmia_utils.upload_model(
-            algorithmia_api_key, test_output_path, remote_path, "test_out.txt"
+            algorithmia_api_key, test_model_output_path, remote_path, test_model_name
         )
     else:
         raise Exception(
