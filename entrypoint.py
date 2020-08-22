@@ -27,12 +27,11 @@ if __name__ == "__main__":
             notebook_path=workspace_notebook_path, execution_path=repo_path
         )
 
-        test_output_path = "{}/test_out.txt".format(repo_path)
         test_model_name = "autodeployed_model.pkl"
         test_model_output_path = "{}/model/{}".format(repo_path, test_model_name)
-        with open(test_output_path) as f:
-            test_file_contents = f.read()
-            print(test_file_contents)
+        # with open(test_output_path) as f:
+        #     test_file_contents = f.read()
+        #     print(test_file_contents)
 
         remote_path = "data://asli/automated_deploy"
         algorithmia_utils.upload_model(
