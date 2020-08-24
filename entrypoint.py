@@ -12,9 +12,8 @@ if __name__ == "__main__":
 
     algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY")
     notebook_path = os.getenv("INPUT_NOTEBOOK_PATH")
-    print("notebook path:", notebook_path)
     remote_upload_path = os.getenv("INPUT_REMOTE_UPLOAD_PATH")
-    model_file_path = os.getenv("INPUT_MODEL_FILE_PATH")
+    model_file_name = os.getenv("INPUT_MODEL_FILE_NAME")
 
     if not algorithmia_api_key:
         raise Exception("field 'algorithmia_api_key' not defined in workflow")
@@ -27,11 +26,12 @@ if __name__ == "__main__":
             notebook_path=workspace_notebook_path, execution_path=repo_path
         )
 
-        test_model_name = "autodeployed_model.pkl"
-        test_model_full_path = "{}/{}".format(repo_path, test_model_name)
-        remote_path = "data://asli/automated_deploy_v2"
+        test_model_full_path = "{}/{}".format(repo_path, model_file_name)
         algorithmia_utils.upload_model(
-            algorithmia_api_key, test_model_full_path, remote_path, test_model_name
+            algorithmia_api_key,
+            test_model_full_path,
+            remote_upload_path,
+            model_file_name,
         )
     else:
         raise Exception(
