@@ -11,7 +11,7 @@ inputs:
   current_repo:
     description: "Repo path to be used by actions/checkout@v2, to mount the workflow workspace to /github/workspace/"
     required: true
-    model_file_name:
+  model_file_name:
     description: "TBD"
     required: true
   remote_upload_path:
