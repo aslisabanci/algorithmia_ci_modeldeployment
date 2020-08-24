@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import os
 from src import algorithmia_utils, notebook_utils
 
