@@ -11,7 +11,7 @@ inputs:
   current_repo:
     description: "Repo path to be used by actions/checkout@v2, to mount the workflow workspace to /github/workspace/"
     required: true
-  model_file_path:
+    model_file_name:
     description: "TBD"
     required: true
   remote_upload_path:
@@ -26,6 +26,6 @@ runs:
   args:
     - ${{ inputs.algorithmia_api_key }}
     - ${{ inputs.current_repo }}
-    - ${{ inputs.model_file_path }}
+    - ${{ inputs.model_file_name }}
     - ${{ inputs.remote_upload_path }}
     - ${{ inputs.notebook_path }}

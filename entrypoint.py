@@ -1,14 +1,9 @@
-#!/usr/bin/python3
-
-import os, json
-from action_src import algorithmia_utils, notebook_utils
+import os
+from src import algorithmia_utils, notebook_utils
 
 if __name__ == "__main__":
     repo_name = os.getenv("INPUT_CURRENT_REPO")
     repo_path = "/github/workspace/{}".format(repo_name)
-
-    # TODO: needed?
-    algo_hash = os.getenv("GITHUB_SHA")
 
     algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY")
     notebook_path = os.getenv("INPUT_NOTEBOOK_PATH")
@@ -28,14 +23,10 @@ if __name__ == "__main__":
         )
 
         test_model_name = "autodeployed_model.pkl"
-        test_model_output_path = "{}/model/{}".format(repo_path, test_model_name)
-        # with open(test_output_path) as f:
-        #     test_file_contents = f.read()
-        #     print(test_file_contents)
-
+        test_model_full_path = "{}/{}".format(repo_path, test_model_name)
         remote_path = "data://asli/automated_deploy"
         algorithmia_utils.upload_model(
-            algorithmia_api_key, test_model_output_path, remote_path, test_model_name
+            algorithmia_api_key, test_model_full_path, remote_path, test_model_name
         )
     else:
         raise Exception(
