@@ -16,4 +16,5 @@ RUN pip3 install algorithmia&& \
 
 COPY entrypoint.py /entrypoint.py
 COPY src /src
+RUN chmod +x /entrypoint.py
 CMD ["/usr/bin/python3", "entrypoint.py"]
