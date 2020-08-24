@@ -29,7 +29,7 @@ if __name__ == "__main__":
 
         test_model_name = "autodeployed_model.pkl"
         test_model_full_path = "{}/{}".format(repo_path, test_model_name)
-        remote_path = "data://asli/automated_deploy"
+        remote_path = "data://asli/automated_deploy_v2"
         algorithmia_utils.upload_model(
             algorithmia_api_key, test_model_full_path, remote_path, test_model_name
         )
