@@ -3,7 +3,10 @@
 import os
 from src import algorithmia_utils, notebook_utils
 
+print("entry outside")
+
 if __name__ == "__main__":
+    print("Entry point called")
     repo_name = os.getenv("INPUT_CURRENT_REPO")
     repo_path = "/github/workspace/{}".format(repo_name)
 
