@@ -3,17 +3,14 @@
 import os
 from src import algorithmia_utils, notebook_utils
 
-print("entry outside")
-
 if __name__ == "__main__":
-    print("Entry point called")
     repo_name = os.getenv("INPUT_CURRENT_REPO")
     repo_path = "/github/workspace/{}".format(repo_name)
 
     algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY")
     notebook_path = os.getenv("INPUT_NOTEBOOK_PATH")
     upload_path = os.getenv("INPUT_ALGORITHMIA_UPLOADPATH")
-    model_path = os.getenv("INPUT_MODELFILE_RELATIVEPATH")
+    model_rel_path = os.getenv("INPUT_MODELFILE_RELATIVEPATH")
 
     if not algorithmia_api_key:
         raise Exception("field 'algorithmia_api_key' not defined in workflow")
@@ -26,9 +23,9 @@ if __name__ == "__main__":
             notebook_path=workspace_notebook_path, execution_path=repo_path
         )
 
-        model_full_path = "{}/{}".format(repo_path, model_path)
+        model_full_path = "{}/{}".format(repo_path, model_rel_path)
         algorithmia_utils.upload_model(
-            algorithmia_api_key, upload_path, model_path,
+            algorithmia_api_key, model_full_path, upload_path
         )
     else:
         raise Exception(
