@@ -14,7 +14,7 @@ inputs:
   notebook_path:
     description: "Path of the notebook to be executed by this action"
     required: false
-  model_file_name:
+  model_file_path:
     description: "TBD"
     required: true
   remote_upload_path:
@@ -27,6 +27,6 @@ runs:
     - ${{ inputs.algorithmia_api_key }}
     - ${{ inputs.current_repo }}
     - ${{ inputs.notebook_path }}
-    - ${{ inputs.model_file_name }}
+    - ${{ inputs.model_file_path }}
     - ${{ inputs.remote_upload_path }}
     
