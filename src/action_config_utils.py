@@ -2,7 +2,7 @@ import yaml
 
 
 class ActionConfigUtils:
-    def __init__(self, config_path) -> None:
+    def __init__(self, config_path=".github/workflows/main.yml") -> None:
         self.action_config_path = config_path
         self.config = None
         with open(self.action_config_path, "r") as stream:
@@ -34,11 +34,13 @@ class ActionConfigUtils:
             )
         return model_relativepath
 
-    def get_algorithmia_filepaths(self, algo_name, inference_script_name=None):
+    def get_algorithmia_filepaths(
+        self, algo_name, workspace_path="/github/workspace", inference_script_name=None
+    ):
         if not inference_script_name:
             inference_script_name = algo_name
         algo_script_path = (
-            f"/github/workspace/{algo_name}/src/{inference_script_name}.py"
+            f"{workspace_path}/{algo_name}/src/{inference_script_name}.py"
         )
-        algo_requirements_path = f"/github/workspace/{algo_name}/requirements.txt"
+        algo_requirements_path = f"{workspace_path}/{algo_name}/requirements.txt"
         return algo_script_path, algo_requirements_path
