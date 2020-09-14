@@ -4,10 +4,10 @@ import json
 from datetime import datetime
 
 
-def upload_model(api_key, local_path, remote_path, commit_hash):
+def upload_model(api_key, local_path, remote_path, commit_SHA):
     _, model_name = os.path.split(local_path)
     name_before_ext, ext = tuple(os.path.splitext(model_name))
-    unique_model_name = "{}_{}{}".format(name_before_ext, commit_hash, ext)
+    unique_model_name = "{}_{}{}".format(name_before_ext, commit_SHA, ext)
     print(
         "will upload {} from {} to {}".format(
             unique_model_name, local_path, remote_path
@@ -33,7 +33,7 @@ def upload_model(api_key, local_path, remote_path, commit_hash):
 def update_algo_model_config(
     base_path,
     github_repo,
-    commit_hash,
+    commit_SHA,
     commit_msg,
     model_filepath,
     config_rel_path="model_config.json",
@@ -45,7 +45,7 @@ def update_algo_model_config(
             config = json.load(config_file)
 
     config["model_filepath"] = model_filepath
-    config["model_origin_commit_hash"] = commit_hash
+    config["model_origin_commit_SHA"] = commit_SHA
     config["model_origin_commit_msg"] = commit_msg
     config["model_origin_repo"] = github_repo
     config["model_uploaded_utc"] = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S.%f")
