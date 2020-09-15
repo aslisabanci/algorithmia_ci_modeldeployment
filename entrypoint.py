@@ -12,8 +12,8 @@ if __name__ == "__main__":
 
     algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY")
     notebook_path = os.getenv("INPUT_NOTEBOOK_PATH")
-    upload_path = os.getenv("INPUT_ALGORITHMIA_UPLOADPATH")
     model_rel_path = os.getenv("INPUT_MODELFILE_RELATIVEPATH")
+    upload_path = os.getenv("INPUT_ALGORITHMIA_UPLOADPATH")
 
     algo_name = os.getenv("ALGORITHMIA_ALGONAME")
 
