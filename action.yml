@@ -1,4 +1,4 @@
-name: "Deploy Model & Algorithm to Algorithmia"
+name: "Deploy to Algorithmia"
 description: "TBD"
 branding:
   icon: "alert-circle"

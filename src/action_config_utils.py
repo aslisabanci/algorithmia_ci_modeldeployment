@@ -1,8 +1,5 @@
 import yaml
 
-# TODO: Define strings that are coupled with the action config separately
-
-
 ALGORITHMIA_CI_JOB = "algorithmia-CI-deployment"
 ALGORITHMIA_MODELDEPLOY_STEP = "Deploy Model to Algorithmia"
 MODELFILE_RELPATH_KEY = "modelfile_relativepath"
