@@ -1,5 +1,13 @@
 import yaml
 
+# TODO: Define strings that are coupled with the action config separately
+
+
+ALGORITHMIA_CI_JOB = "algorithmia-CI-deployment"
+ALGORITHMIA_MODELDEPLOY_STEP = "Deploy Model to Algorithmia"
+MODELFILE_RELPATH_KEY = "modelfile_relativepath"
+ALGONAME_KEY = "ALGORITHMIA_ALGONAME"
+
 
 class ActionConfigUtils:
     def __init__(self, config_path=".github/workflows/main.yml") -> None:
@@ -11,9 +19,7 @@ class ActionConfigUtils:
     def get_algoname(self, default_name):
         algo_name = default_name
         try:
-            algo_name = self.config["jobs"]["algorithmia-ci"]["env"][
-                "ALGORITHMIA_ALGONAME"
-            ]
+            algo_name = self.config["jobs"][ALGORITHMIA_CI_JOB]["env"][ALGONAME_KEY]
         except KeyError as e:
             print(
                 f"Required keys for algorithm name do not exist in workflow YAML file: {e}"
@@ -23,10 +29,10 @@ class ActionConfigUtils:
     def get_model_relativepath(self, default_path):
         model_relativepath = default_path
         try:
-            ci_steps = self.config["jobs"]["algorithmia-ci"]["steps"]
+            ci_steps = self.config["jobs"][ALGORITHMIA_CI_JOB]["steps"]
             for step in ci_steps:
-                if step["name"] == "Deploy to Algorithmia":
-                    model_relativepath = step["with"]["modelfile_relativepath"]
+                if step["name"] == ALGORITHMIA_MODELDEPLOY_STEP:
+                    model_relativepath = step["with"][MODELFILE_RELPATH_KEY]
                     break
         except KeyError as e:
             print(
