@@ -1,4 +1,4 @@
-from ubuntu:18.04
+from ubuntu:20.04
 
 
 RUN apt-get update && apt-get install -y \
@@ -10,7 +10,6 @@ RUN apt-get update && apt-get install -y \
 RUN pip3 install algorithmia&& \
     pip3 install algorithmia-api-client&& \
     pip3 install pyyaml&& \
-    pip3 install jupyter&& \
     pip3 install nbformat&& \
     pip3 install nbconvert[execute]&& \
     pip3 install requests
@@ -18,6 +17,4 @@ RUN pip3 install algorithmia&& \
 COPY entrypoint.py /entrypoint.py
 COPY src /src
 RUN chmod +x /entrypoint.py
-RUN pwd
-RUN ls
 ENTRYPOINT ["/entrypoint.py"]
