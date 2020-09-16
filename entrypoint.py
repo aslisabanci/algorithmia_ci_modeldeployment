@@ -10,12 +10,12 @@ if __name__ == "__main__":
     commit_msg = os.getenv("HEAD_COMMIT_MSG")
     commit_SHA = os.getenv("GITHUB_SHA")
 
+    algo_name = os.getenv("ALGORITHMIA_ALGONAME")
+
     algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY")
     notebook_path = os.getenv("INPUT_NOTEBOOK_PATH")
     model_rel_path = os.getenv("INPUT_MODELFILE_RELATIVEPATH")
     upload_path = os.getenv("INPUT_ALGORITHMIA_UPLOADPATH")
-
-    algo_name = os.getenv("ALGORITHMIA_ALGONAME")
 
     error_template_str = "Field '{}' not defined in workflow file. Please check your workflow configuration"
     if not algorithmia_api_key:
@@ -52,12 +52,12 @@ if __name__ == "__main__":
                 if algorithmia_upload_path:
                     algo_dir = "{}/{}".format(workspace, algo_name)
                     algorithmia_utils.update_algo_model_config(
-                        algo_dir,
-                        github_repo,
-                        commit_SHA,
-                        commit_msg,
-                        model_md5_hash,
-                        algorithmia_upload_path,
+                        base_path=algo_dir,
+                        github_repo=github_repo,
+                        commit_SHA=commit_SHA,
+                        commit_msg=commit_msg,
+                        model_filepath=algorithmia_upload_path,
+                        model_md5_hash=model_md5_hash,
                     )
                 else:
                     raise Exception(
