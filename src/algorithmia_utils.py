@@ -2,6 +2,21 @@ import Algorithmia
 import os
 import json
 from datetime import datetime
+import hashlib
+
+
+def calculate_md5(filepath):
+    DIGEST_BLOCK_SIZE = 128 * 64
+    md5_hash = None
+    try:
+        with open(filepath, "rb") as f:
+            file_hash = hashlib.md5()
+            while chunk := f.read(DIGEST_BLOCK_SIZE):
+                file_hash.update(chunk)
+        md5_hash = file_hash.hexdigest()
+    except Exception as e:
+        print(f"An exception occurred while getting MD5 hash of file: {e}")
+    return md5_hash
 
 
 def upload_model(api_key, local_path, remote_path, commit_SHA):
@@ -36,6 +51,7 @@ def update_algo_model_config(
     commit_SHA,
     commit_msg,
     model_filepath,
+    model_md5_hash,
     config_rel_path="model_config.json",
 ):
     config = {}
@@ -45,6 +61,7 @@ def update_algo_model_config(
             config = json.load(config_file)
 
     config["model_filepath"] = model_filepath
+    config["model_md5_hash"] = model_md5_hash
     config["model_origin_commit_SHA"] = commit_SHA
     config["model_origin_commit_msg"] = commit_msg
     config["model_origin_repo"] = github_repo
@@ -52,7 +69,3 @@ def update_algo_model_config(
 
     with open(full_path, "w") as new_config_file:
         json.dump(config, new_config_file)
-
-
-# TODO: Update the notebook with new walk through text.
-# TODO: Add another example with an algorithm hosted on Github, instead of Algorithmia.
