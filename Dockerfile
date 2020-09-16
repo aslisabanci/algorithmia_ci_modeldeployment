@@ -13,8 +13,7 @@ RUN pip3 install algorithmia&& \
     pip3 install jupyter&& \
     pip3 install nbformat&& \
     pip3 install nbconvert[execute]&& \
-    pip3 install requests&& \
-    pip3 install hashlib
+    pip3 install requests
 
 COPY entrypoint.py /entrypoint.py
 COPY src /src
