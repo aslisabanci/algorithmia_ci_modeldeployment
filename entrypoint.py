@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 
 import os
-from src import algorithmia_utils, notebook_utils
+
+# from src import algorithmia_utils, notebook_utils
 
 
 if __name__ == "__main__":
