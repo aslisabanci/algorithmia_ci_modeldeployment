@@ -20,6 +20,8 @@ if __name__ == "__main__":
 
     extra = os.getenv("INPUT_EXTRA")
     print(f"extra input: {extra}")
+    commit = os.getenv("INPUT_COMMIT")
+    print(f"commit: {commit}")
 
     error_template_str = "Field '{}' not defined in workflow file. Please check your workflow configuration"
     if not algorithmia_api_key:
