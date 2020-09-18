@@ -2,6 +2,7 @@ from ubuntu:20.04
 
 
 RUN apt-get update && apt-get install -y \
+    git \
     python3.7 \
     python3-setuptools \
     python3-pip
