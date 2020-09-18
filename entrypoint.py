@@ -11,7 +11,7 @@ if __name__ == "__main__":
     # commit_msg = os.getenv("HEAD_COMMIT_MSG")
     commit_SHA = os.getenv("GITHUB_SHA")
 
-    commit_msg = os.getenv("COMMIT_MSG")
+    commit_msg = os.getenv("INPUT_COMMIT_MSG")
     print(commit_msg)
 
     # algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY", "")
