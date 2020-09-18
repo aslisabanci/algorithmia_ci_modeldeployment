@@ -1,32 +1,42 @@
-name: "Deploy to Algorithmia"
-description: "TBD"
+name: 'Deploy to Algorithmia'
+description: 'TBD'
 branding:
-  icon: "alert-circle"
-  color: "yellow"
+  icon: 'alert-circle'
+  color: 'yellow'
 inputs:
   algorithmia_api_key:
-    description: "Algorithmia API key"
+    description: 'Algorithmia API Key - From Github Secrets vault'
+    required: true
+  algorithmia_username:
+    description: 'Algorithmia Username - From Github Secrets vault'
+    required: true
+  algorithmia_password:
+    description: 'Algorithmia Password - From Github Secrets vault'
+    required: true
+  algorithmia_algoname:
+    description: 'Algorithmia Algorithm name'
     required: true
   notebook_path:
-    description: "Path of the notebook to be executed by this action"
+    description: 'Path of the notebook to be executed by this action'
     required: false
-  modelfile_relativepath:
-    description: "Path of the model file to be uploaded to Algorithmia"
+    default: 'model_notebook.ipynb'
+  model_path:
+    description: 'Path of the model file to be uploaded to Algorithmia'
     required: true
+    default: './autodeployed_model.pkl'
   algorithmia_uploadpath:
-    description: "Algorithmia data collection name to upload the model file"
+    description: 'Algorithmia data collection name to upload the model file'
     required: true
-  upload_dir:
-    description: "TBD"
-    required: false
-    default: "test dir from defaults"
+    default: 'data://"$ALGORITHMIA_USERNAME"/"$ALGORITHMIA_ALGONAME"'
 runs:
-  using: "docker"
-  image: "Dockerfile"
+  using: 'docker'
+  image: 'Dockerfile'
   args:
     - ${{ inputs.algorithmia_api_key }}
+    - ${{ inputs.algorithmia_username }}
+    - ${{ inputs.algorithmia_password }}
+    - ${{ inputs.algorithmia_algoname }}
     - ${{ inputs.notebook_path }}
-    - ${{ inputs.modelfile_relativepath }}
+    - ${{ inputs.model_path }}
     - ${{ inputs.algorithmia_uploadpath }}
-    - ${{ inputs.upload_dir }}
     

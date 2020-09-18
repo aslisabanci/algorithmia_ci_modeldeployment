@@ -8,15 +8,23 @@ import os
 if __name__ == "__main__":
     github_repo = os.getenv("GITHUB_REPOSITORY")
     workspace = os.getenv("GITHUB_WORKSPACE")
-    commit_msg = os.getenv("HEAD_COMMIT_MSG")
+    # commit_msg = os.getenv("HEAD_COMMIT_MSG")
     commit_SHA = os.getenv("GITHUB_SHA")
 
-    algo_name = os.getenv("ALGORITHMIA_ALGONAME")
-
     algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY")
+    algorithmia_username = os.getenv("INPUT_ALGORITHMIA_USERNAME")
+    algo_name = os.getenv("INPUT_ALGORITHMIA_ALGONAME")
+
     notebook_path = os.getenv("INPUT_NOTEBOOK_PATH")
-    model_rel_path = os.getenv("INPUT_MODELFILE_RELATIVEPATH")
+    model_rel_path = os.getenv("INPUT_MODEL_PATH")
     upload_path = os.getenv("INPUT_ALGORITHMIA_UPLOADPATH")
+
+    print(f"Pre-replacement: {upload_path}")
+    if "$ALGORITHMIA_USERNAME" in upload_path:
+        upload_path = upload_path.replace("$ALGORITHMIA_USERNAME", algorithmia_username)
+    if "$ALGORITHMIA_ALGONAME" in upload_path:
+        upload_path = upload_path.replace("$ALGORITHMIA_ALGONAME", algo_name)
+    print(f"Post-replacement: {upload_path}")
 
     extra = os.getenv("INPUT_EXTRA")
     print(f"extra input: {extra}")
@@ -29,8 +37,9 @@ if __name__ == "__main__":
     error_template_str = "Field '{}' not defined in workflow file. Please check your workflow configuration"
     if not algorithmia_api_key:
         raise Exception(error_template_str.format("algorithmia_api_key"))
+    # TODO: Add new inputs checks too
     if not model_rel_path:
-        raise Exception(error_template_str.format("modelfile_relativepath"))
+        raise Exception(error_template_str.format("model_path"))
     if not upload_path:
         raise Exception(error_template_str.format("algorithmia_uploadpath"))
 
