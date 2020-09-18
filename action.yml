@@ -19,6 +19,7 @@ inputs:
   upload_dir:
     description: "TBD"
     required: false
+    default: "test dir from defaults"
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -27,5 +28,5 @@ runs:
     - ${{ inputs.notebook_path }}
     - ${{ inputs.modelfile_relativepath }}
     - ${{ inputs.algorithmia_uploadpath }}
-    - ${{ secrets.UPLOAD_DIR }}
+    - ${{ inputs.upload_dir }}
     
