@@ -11,11 +11,8 @@ if __name__ == "__main__":
     # commit_msg = os.getenv("HEAD_COMMIT_MSG")
     commit_SHA = os.getenv("GITHUB_SHA")
 
-    github_env = os.getenv("GITHUB_CONTEXT")
-    print("env", github_env)
-
-    workflow = os.getenv("GITHUB_WORKFLOW")
-    print("workflow", workflow)
+    commit_msg = os.getenv("COMMIT_MSG")
+    print(commit_msg)
 
     # algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY", "")
     # algorithmia_username = os.getenv("INPUT_ALGORITHMIA_USERNAME", "")
