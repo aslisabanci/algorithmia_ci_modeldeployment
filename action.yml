@@ -27,7 +27,7 @@ inputs:
   algorithmia_uploadpath:
     description: 'Algorithmia data collection name to upload the model file'
     required: true
-    default: 'data://"$ALGORITHMIA_USERNAME"/"$ALGORITHMIA_ALGONAME"'
+    default: 'data://$ALGORITHMIA_USERNAME/$ALGORITHMIA_ALGONAME'
 runs:
   using: 'docker'
   image: 'Dockerfile'

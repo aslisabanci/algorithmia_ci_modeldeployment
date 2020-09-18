@@ -20,10 +20,12 @@ if __name__ == "__main__":
     upload_path = os.getenv("INPUT_ALGORITHMIA_UPLOADPATH")
 
     print(f"Pre-replacement: {upload_path}")
-    if "$ALGORITHMIA_USERNAME" in upload_path:
-        upload_path = upload_path.replace("$ALGORITHMIA_USERNAME", algorithmia_username)
-    if "$ALGORITHMIA_ALGONAME" in upload_path:
-        upload_path = upload_path.replace("$ALGORITHMIA_ALGONAME", algo_name)
+    if '"$ALGORITHMIA_USERNAME"' in upload_path:
+        upload_path = upload_path.replace(
+            '"$ALGORITHMIA_USERNAME"', algorithmia_username
+        )
+    if '"$ALGORITHMIA_ALGONAME"' in upload_path:
+        upload_path = upload_path.replace('"$ALGORITHMIA_ALGONAME"', algo_name)
     print(f"Post-replacement: {upload_path}")
 
     extra = os.getenv("INPUT_EXTRA")
