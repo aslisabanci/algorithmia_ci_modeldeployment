@@ -16,6 +16,9 @@ inputs:
   algorithmia_uploadpath:
     description: "Algorithmia data collection name to upload the model file"
     required: true
+  upload_dir:
+    description: "TBD"
+    required: false
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -24,4 +27,5 @@ runs:
     - ${{ inputs.notebook_path }}
     - ${{ inputs.modelfile_relativepath }}
     - ${{ inputs.algorithmia_uploadpath }}
+    - ${{ secrets.UPLOAD_DIR }}
     

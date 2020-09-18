@@ -22,6 +22,9 @@ if __name__ == "__main__":
     commit = os.getenv("INPUT_COMMIT")
     print(f"commit: {commit}")
 
+    test_dir = os.getenv("INPUT_UPLOAD_DIR")
+    print(f"test_dir: {test_dir}")
+
     error_template_str = "Field '{}' not defined in workflow file. Please check your workflow configuration"
     if not algorithmia_api_key:
         raise Exception(error_template_str.format("algorithmia_api_key"))
