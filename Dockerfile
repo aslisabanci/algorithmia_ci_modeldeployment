@@ -21,5 +21,5 @@ COPY src /src
 # ENTRYPOINT ["/entrypoint.py"]
 
 COPY entrypoint.sh /entrypoint.sh
-chmod +x entrypoint.sh
+RUN chmod +x entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
