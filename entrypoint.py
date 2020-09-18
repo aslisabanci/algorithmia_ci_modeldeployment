@@ -11,21 +11,19 @@ if __name__ == "__main__":
     # commit_msg = os.getenv("HEAD_COMMIT_MSG")
     commit_SHA = os.getenv("GITHUB_SHA")
 
-    algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY")
-    algorithmia_username = os.getenv("INPUT_ALGORITHMIA_USERNAME")
-    algo_name = os.getenv("INPUT_ALGORITHMIA_ALGONAME")
+    algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY", "")
+    algorithmia_username = os.getenv("INPUT_ALGORITHMIA_USERNAME", "")
+    algo_name = os.getenv("INPUT_ALGORITHMIA_ALGONAME", "")
 
-    notebook_path = os.getenv("INPUT_NOTEBOOK_PATH")
-    model_rel_path = os.getenv("INPUT_MODEL_PATH")
-    upload_path = os.getenv("INPUT_ALGORITHMIA_UPLOADPATH")
+    notebook_path = os.getenv("INPUT_NOTEBOOK_PATH", "")
+    model_rel_path = os.getenv("INPUT_MODEL_PATH", "")
+    upload_path = os.getenv("INPUT_ALGORITHMIA_UPLOADPATH", "")
 
     print(f"Pre-replacement: {upload_path}")
-    if '"$ALGORITHMIA_USERNAME"' in upload_path:
-        upload_path = upload_path.replace(
-            '"$ALGORITHMIA_USERNAME"', algorithmia_username
-        )
-    if '"$ALGORITHMIA_ALGONAME"' in upload_path:
-        upload_path = upload_path.replace('"$ALGORITHMIA_ALGONAME"', algo_name)
+    if "$ALGORITHMIA_USERNAME" in upload_path:
+        upload_path = upload_path.replace("$ALGORITHMIA_USERNAME", algorithmia_username)
+    if "$ALGORITHMIA_ALGONAME" in upload_path:
+        upload_path = upload_path.replace("$ALGORITHMIA_ALGONAME", algo_name)
     print(f"Post-replacement: {upload_path}")
 
     extra = os.getenv("INPUT_EXTRA")
