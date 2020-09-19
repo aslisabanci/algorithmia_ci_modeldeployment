@@ -25,6 +25,7 @@ class AlgorithmiaDeployer:
 
         self.model_full_path = f"{workspace_path}/{model_path}"
 
+        # TODO: Remove after clarification
         # os.environ[
         #     "ALGORITHMIA_SCRIPT_PATH"
         # ] = f"{self.workspace_path}/{self.algo_name}/src/{self.algo_name}.py"
@@ -130,8 +131,10 @@ class AlgorithmiaDeployer:
         model_md5_hash,
         config_rel_path="model_config.json",
     ):
-        algo_dir = f"{self.workspace_path}/{self.algo_name}"
-        config_full_path = f"{algo_dir}/{config_rel_path}"
+        # TODO: Remove after clarification
+        # algo_dir = f"{self.workspace_path}/{self.algo_name}"
+        # config_full_path = f"{algo_dir}/{config_rel_path}"
+        config_full_path = f"{self.algo_dir}/{config_rel_path}"
 
         config = {}
         if os.path.exists(config_full_path):
