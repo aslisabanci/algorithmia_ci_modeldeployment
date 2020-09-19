@@ -16,7 +16,6 @@ inputs:
   algorithmia_algoname:
     description: 'Algorithmia Algorithm name'
     required: true
-    default: ${{ secrets.algorithmia_algoname }}
   notebook_path:
     description: 'Path of the notebook to be executed by this action'
     required: false
