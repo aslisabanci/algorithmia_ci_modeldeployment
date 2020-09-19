@@ -30,7 +30,7 @@ class AlgorithmiaDeployer:
         if os.path.exists(self.model_full_path):
             model_md5_hash = self._calculate_model_md5()
             if model_md5_hash:
-                self._replace_placeholders(upload_path)
+                upload_path = self._replace_placeholders(upload_path)
                 algorithmia_upload_path = self._upload_model(upload_path, commit_SHA)
                 if algorithmia_upload_path:
                     self._update_algo_model_config(
@@ -62,6 +62,7 @@ class AlgorithmiaDeployer:
             parametric_str = parametric_str.replace(
                 "$ALGORITHMIA_ALGONAME", self.algo_name
             )
+        return parametric_str
 
     def _calculate_model_md5(self):
         DIGEST_BLOCK_SIZE = 128 * 64
