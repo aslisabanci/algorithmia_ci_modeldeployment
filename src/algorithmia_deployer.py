@@ -17,6 +17,13 @@ class AlgorithmiaDeployer:
 
         self.model_full_path = f"{workspace_path}/{model_path}"
 
+        os.environ[
+            "ALGORITHMIA_SCRIPT_PATH"
+        ] = f"{self.workspace_path}/{self.algo_name}/src/{self.algo_name}.py"
+        os.environ[
+            "ALGORITHMIA_REQUIREMENTS_PATH"
+        ] = f"{self.workspace_path}/{self.algo_name}/requirements.txt"
+
     def check_upload_link_algomodel(
         self, upload_path, commit_SHA, github_repo, commit_msg
     ):
@@ -45,17 +52,6 @@ class AlgorithmiaDeployer:
             raise Exception(
                 f"Model file not found at {self.model_full_path}. Please check your workflow configuration."
             )
-
-    def get_algorithm_filepaths(self, inference_script_name=None):
-        if not inference_script_name:
-            inference_script_name = self.algo_name
-        algo_script_path = (
-            f"{self.workspace_path}/{self.algo_name}/src/{inference_script_name}.py"
-        )
-        algo_requirements_path = (
-            f"{self.workspace_path}/{self.algo_name}/requirements.txt"
-        )
-        return algo_script_path, algo_requirements_path
 
     def _replace_placeholders(self, parametric_str):
         if "$ALGORITHMIA_USERNAME" in parametric_str:

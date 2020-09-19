@@ -10,18 +10,18 @@ if __name__ == "__main__":
     github_repo = os.getenv("GITHUB_REPOSITORY")
     commit_SHA = os.getenv("GITHUB_SHA")
     commit_msg = os.getenv("INPUT_COMMIT_MSG")
-    algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY", "")
-    algorithmia_username = os.getenv("INPUT_ALGORITHMIA_USERNAME", "")
-    algorithmia_algo_name = os.getenv("INPUT_ALGORITHMIA_ALGONAME", "")
-    notebook_path = os.getenv("INPUT_NOTEBOOK_PATH", "")
-    model_rel_path = os.getenv("INPUT_MODEL_PATH", "")
-    upload_path = os.getenv("INPUT_ALGORITHMIA_UPLOADPATH", "")
+    algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY")
+    algorithmia_username = os.getenv("INPUT_ALGORITHMIA_USERNAME")
+    algorithmia_algo_name = os.getenv("INPUT_ALGORITHMIA_ALGONAME")
+    notebook_path = os.getenv("INPUT_NOTEBOOK_PATH")
+    model_path = os.getenv("INPUT_MODEL_PATH")
+    upload_path = os.getenv("INPUT_ALGORITHMIA_UPLOADPATH")
 
     error_template_str = "Field '{}' not defined in workflow file. Please check your workflow configuration"
     if not algorithmia_api_key:
         raise Exception(error_template_str.format("algorithmia_api_key"))
     # TODO: Add new inputs checks too
-    if not model_rel_path:
+    if not model_path:
         raise Exception(error_template_str.format("model_path"))
     if not upload_path:
         raise Exception(error_template_str.format("algorithmia_uploadpath"))
@@ -35,7 +35,7 @@ if __name__ == "__main__":
                 api_key=algorithmia_api_key,
                 username=algorithmia_username,
                 algo_name=algorithmia_algo_name,
-                model_path=model_rel_path,
+                model_path=model_path,
                 workspace_path=workspace,
             )
             algorithmia_deployer.check_upload_link_algomodel(
