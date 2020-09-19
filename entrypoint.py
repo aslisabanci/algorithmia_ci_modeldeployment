@@ -14,8 +14,14 @@ if __name__ == "__main__":
     input_commit_msg = os.getenv("INPUT_COMMIT_MSG")
     print("input commit", input_commit_msg)
 
-    env_commit_msg = os.getenv("COMMIT_MSG")
+    env_commit_msg = os.getenv("commit_msg")
     print("env commit", env_commit_msg)
+
+    commit_msg2 = os.getenv("HEAD_COMMIT_MSG")
+    print("env commit2", commit_msg2)
+
+    first = os.getenv("FIRST_HEAD_COMMIT_MSG")
+    print("first", first)
 
     # algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY", "")
     # algorithmia_username = os.getenv("INPUT_ALGORITHMIA_USERNAME", "")
