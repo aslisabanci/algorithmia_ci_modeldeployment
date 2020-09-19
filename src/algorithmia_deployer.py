@@ -1,3 +1,4 @@
+from pandas.core import algorithms
 import Algorithmia
 import os
 import json
@@ -7,22 +8,36 @@ import hashlib
 
 class AlgorithmiaDeployer:
     def __init__(
-        self, api_key, username, algo_name, model_path, workspace_path
+        self,
+        api_key,
+        username,
+        algo_name,
+        model_path,
+        algo_dir,
+        workspace_path,
     ) -> None:
         self.algo_client = Algorithmia.client(api_key)
         self.username = username
         self.algo_name = algo_name
         self.model_path = model_path
+        self.algo_dir = algo_dir
         self.workspace_path = workspace_path
 
         self.model_full_path = f"{workspace_path}/{model_path}"
 
+        # os.environ[
+        #     "ALGORITHMIA_SCRIPT_PATH"
+        # ] = f"{self.workspace_path}/{self.algo_name}/src/{self.algo_name}.py"
+        # os.environ[
+        #     "ALGORITHMIA_REQUIREMENTS_PATH"
+        # ] = f"{self.workspace_path}/{self.algo_name}/requirements.txt"
+
         os.environ[
             "ALGORITHMIA_SCRIPT_PATH"
-        ] = f"{self.workspace_path}/{self.algo_name}/src/{self.algo_name}.py"
+        ] = f"{self.algo_dir}/src/{self.algo_name}.py"
         os.environ[
             "ALGORITHMIA_REQUIREMENTS_PATH"
-        ] = f"{self.workspace_path}/{self.algo_name}/requirements.txt"
+        ] = f"{self.algo_dir}/requirements.txt"
 
     def check_upload_link_algomodel(
         self, upload_path, commit_SHA, github_repo, commit_msg

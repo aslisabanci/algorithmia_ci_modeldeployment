@@ -16,9 +16,10 @@ if [ $? -eq 0 ]
 then
     echo "Successfully executed action script, for optional notebook execution and model file upload."
 
+    cp -R "$INPUT_ALGORITHMIA_ALGO_DIR"/. "$INPUT_ALGORITHMIA_ALGONAME"/
     cd "$INPUT_ALGORITHMIA_ALGONAME"
     git config --global user.name "$INPUT_ALGORITHMIA_USERNAME"
-    git config --global user.email "asabanci+githubCI@algorithmia.io"
+    git config --global user.email "$INPUT_ALGORITHMIA_EMAIL"
     git add .
     git commit -m "Automated deployment via Github CI"
     git push

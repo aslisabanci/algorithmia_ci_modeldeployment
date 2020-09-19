@@ -8,7 +8,10 @@ inputs:
     description: 'Algorithmia API Key - From Github Secrets vault'
     required: true
   algorithmia_username:
-    description: 'Algorithmia Username - From Github Secrets vault'
+    description: 'Algorithmia Username, used as Git Commit Username and as part of default model upload path - From Github Secrets vault'
+    required: true
+  algorithmia_email:
+    description: 'Algorithmia Email, used as Git Commit Email - From Github Secrets vault'
     required: true
   algorithmia_password:
     description: 'Algorithmia Password - From Github Secrets vault'
@@ -24,6 +27,10 @@ inputs:
     description: 'Path of the model file to be uploaded to Algorithmia'
     required: true
     default: 'algorithmia_model.pkl'
+    algorithmia_algo_dir:
+    description: 'Dir of the algorithm files to be uploaded to Algorithmia'
+    required: false
+    default: 'algorithmia'
   algorithmia_uploadpath:
     description: 'Algorithmia data collection name to upload the model file'
     required: true
@@ -34,9 +41,11 @@ runs:
   args:
     - ${{ inputs.algorithmia_api_key }}
     - ${{ inputs.algorithmia_username }}
+    - ${{ inputs.algorithmia_email }}
     - ${{ inputs.algorithmia_password }}
     - ${{ inputs.algorithmia_algoname }}
     - ${{ inputs.notebook_path }}
     - ${{ inputs.model_path }}
+    - ${{ inputs.algorithmia_algo_dir }}
     - ${{ inputs.algorithmia_uploadpath }}
     

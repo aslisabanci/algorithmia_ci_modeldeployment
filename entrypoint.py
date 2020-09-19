@@ -15,6 +15,7 @@ if __name__ == "__main__":
     algorithmia_algo_name = os.getenv("INPUT_ALGORITHMIA_ALGONAME")
     notebook_path = os.getenv("INPUT_NOTEBOOK_PATH")
     model_path = os.getenv("INPUT_MODEL_PATH")
+    algorithmia_algo_dir = os.getenv("INPUT_ALGORITHMIA_ALGO_DIR")
     upload_path = os.getenv("INPUT_ALGORITHMIA_UPLOADPATH")
 
     error_template_str = "Field '{}' not defined in workflow file. Please check your workflow configuration"
@@ -36,6 +37,7 @@ if __name__ == "__main__":
                 username=algorithmia_username,
                 algo_name=algorithmia_algo_name,
                 model_path=model_path,
+                algo_dir=algorithmia_algo_dir,
                 workspace_path=workspace,
             )
             algorithmia_deployer.check_upload_link_algomodel(
