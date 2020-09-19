@@ -12,10 +12,19 @@ git clone https://"$INPUT_ALGORITHMIA_USERNAME":"$INPUT_ALGORITHMIA_PASSWORD"@gi
 #   - Link the algorithm with the uploaded model
 python3 /entrypoint.py
 
-# Push algorithm updates to Algorithmia
-cd "$INPUT_ALGORITHMIA_ALGONAME"
-git config --global user.name "$INPUT_ALGORITHMIA_USERNAME"
-git config --global user.email "asabanci+githubCI@algorithmia.io"
-git add .
-git commit -m "Automated deployment via Github CI"
-git push
+if [ $? -eq 0 ]
+then
+    echo "Successfully executed action script, for optional notebook execution and model file upload."
+
+    cd "$INPUT_ALGORITHMIA_ALGONAME"
+    git config --global user.name "$INPUT_ALGORITHMIA_USERNAME"
+    git config --global user.email "asabanci+githubCI@algorithmia.io"
+    git add .
+    git commit -m "Automated deployment via Github CI"
+    git push
+else
+  # Redirect stdout from echo command to stderr.
+  echo "Action script exited with error." >&2
+  exit 1
+fi
+
