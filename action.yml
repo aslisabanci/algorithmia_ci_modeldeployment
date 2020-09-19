@@ -19,11 +19,11 @@ inputs:
   notebook_path:
     description: 'Path of the notebook to be executed by this action'
     required: false
-    default: 'model_notebook.ipynb'
+    default: 'algorithmia_model.ipynb'
   model_path:
     description: 'Path of the model file to be uploaded to Algorithmia'
     required: true
-    default: './autodeployed_model.pkl'
+    default: './algorithmia_model.pkl'
   algorithmia_uploadpath:
     description: 'Algorithmia data collection name to upload the model file'
     required: true
