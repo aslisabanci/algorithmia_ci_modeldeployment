@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
 import os
-from .algorithmia_deployer import AlgorithmiaDeployer
-from .notebook_executor import NotebookExecutor
+import algorithmia_deployer
+import notebook_executor
 
 
 if __name__ == "__main__":
@@ -28,10 +28,12 @@ if __name__ == "__main__":
 
     if os.path.exists(workspace):
         try:
-            notebook_executor = NotebookExecutor(workspace, notebook_path)
+            notebook_executor = notebook_executor.NotebookExecutor(
+                workspace, notebook_path
+            )
             notebook_executor.run()
 
-            algorithmia_deployer = AlgorithmiaDeployer(
+            algorithmia_deployer = algorithmia_deployer.AlgorithmiaDeployer(
                 api_key=algorithmia_api_key,
                 username=algorithmia_username,
                 algo_name=algorithmia_algo_name,
