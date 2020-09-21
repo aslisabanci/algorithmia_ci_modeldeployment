@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
 import os
-from src.algorithmia_deployer import AlgorithmiaDeployer
-from src.notebook_executor import NotebookExecutor
+from .algorithmia_deployer import AlgorithmiaDeployer
+from .notebook_executor import NotebookExecutor
 
 
 if __name__ == "__main__":
