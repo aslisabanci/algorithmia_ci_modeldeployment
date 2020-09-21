@@ -13,14 +13,14 @@ class AlgorithmiaDeployer:
         username,
         algo_name,
         model_path,
-        # algo_dir,
+        algo_dir,
         workspace_path,
     ) -> None:
         self.algo_client = Algorithmia.client(api_key)
         self.username = username
         self.algo_name = algo_name
         self.model_path = model_path
-        # self.algo_dir = algo_dir
+        self.algo_dir = self._replace_placeholders(algo_dir)
         self.workspace_path = workspace_path
 
         self.model_full_path = f"{workspace_path}/{model_path}"
@@ -35,10 +35,10 @@ class AlgorithmiaDeployer:
 
         os.environ[
             "ALGORITHMIA_SCRIPT_PATH"
-        ] = f"{self.algo_name}/src/{self.algo_name}.py"
+        ] = f"{self.algo_dir}/src/{self.algo_name}.py"
         os.environ[
             "ALGORITHMIA_REQUIREMENTS_PATH"
-        ] = f"{self.algo_name}/requirements.txt"
+        ] = f"{self.algo_dir}/requirements.txt"
 
     def check_upload_link_algomodel(
         self, upload_path, commit_SHA, github_repo, commit_msg
@@ -71,13 +71,16 @@ class AlgorithmiaDeployer:
 
     def _replace_placeholders(self, parametric_str):
         if "$ALGORITHMIA_USERNAME" in parametric_str:
+            print(f"Replacing $ALGORITHMIA_USERNAME in {parametric_str}")
             parametric_str = parametric_str.replace(
                 "$ALGORITHMIA_USERNAME", self.username
             )
         if "$ALGORITHMIA_ALGONAME" in parametric_str:
+            print(f"Replacing $ALGORITHMIA_ALGONAME in {parametric_str}")
             parametric_str = parametric_str.replace(
                 "$ALGORITHMIA_ALGONAME", self.algo_name
             )
+        print(f"Replaced string became: {parametric_str}")
         return parametric_str
 
     def _calculate_model_md5(self):
@@ -134,7 +137,7 @@ class AlgorithmiaDeployer:
         # TODO: Remove after clarification
         # algo_dir = f"{self.workspace_path}/{self.algo_name}"
         # config_full_path = f"{algo_dir}/{config_rel_path}"
-        config_full_path = f"{self.algo_name}/{config_rel_path}"
+        config_full_path = f"{self.algo_dir}/{config_rel_path}"
 
         config = {}
         if os.path.exists(config_full_path):

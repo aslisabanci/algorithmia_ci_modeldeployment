@@ -27,10 +27,10 @@ inputs:
     description: 'Path of the model file to be uploaded to Algorithmia'
     required: true
     default: 'algorithmia_model.pkl'
-  # algorithmia_algo_dir:
-  #   description: 'Dir of the algorithm files to be uploaded to Algorithmia'
-  #   required: false
-  #   default: '$ALGORITHMIA_ALGONAME'
+  algorithmia_algo_dir:
+    description: 'Dir of the algorithm files to be uploaded to Algorithmia'
+    required: false
+    default: '$ALGORITHMIA_ALGONAME'
   algorithmia_uploadpath:
     description: 'Algorithmia data collection name to upload the model file'
     required: true
