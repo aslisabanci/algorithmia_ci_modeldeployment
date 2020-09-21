@@ -1,4 +1,3 @@
-from pandas.core import algorithms
 import Algorithmia
 import os
 import json

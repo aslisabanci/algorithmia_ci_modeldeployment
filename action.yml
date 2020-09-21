@@ -19,22 +19,18 @@ inputs:
   algorithmia_algoname:
     description: 'Algorithmia Algorithm name'
     required: true
-  notebook_path:
-    description: 'Path of the notebook to be executed by this action'
-    required: false
-    default: 'algorithmia_model.ipynb'
-  model_path:
-    description: 'Path of the model file to be uploaded to Algorithmia'
-    required: true
-    default: 'algorithmia_model.pkl'
-  # algorithmia_algo_dir:
-  #   description: 'Dir of the algorithm files to be uploaded to Algorithmia'
-  #   required: false
-  #   default: '$ALGORITHMIA_ALGONAME'
   algorithmia_uploadpath:
     description: 'Algorithmia data collection name to upload the model file'
     required: true
     default: 'data://$ALGORITHMIA_USERNAME/$ALGORITHMIA_ALGONAME'
+  model_path:
+      description: 'Path of the model file to be uploaded to Algorithmia'
+      required: true
+      default: 'algorithmia_model.pkl'  
+  notebook_path:
+    description: 'Path of the notebook to be executed by this action'
+    required: false
+    default: 'algorithmia_model.ipynb'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -44,8 +40,8 @@ runs:
     - ${{ inputs.algorithmia_email }}
     - ${{ inputs.algorithmia_password }}
     - ${{ inputs.algorithmia_algoname }}
-    - ${{ inputs.notebook_path }}
-    - ${{ inputs.model_path }}
-    # - ${{ inputs.algorithmia_algo_dir }}
     - ${{ inputs.algorithmia_uploadpath }}
+    - ${{ inputs.model_path }}
+    - ${{ inputs.notebook_path }}
+    
     
