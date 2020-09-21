@@ -13,14 +13,14 @@ class AlgorithmiaDeployer:
         username,
         algo_name,
         model_path,
-        algo_dir,
+        # algo_dir,
         workspace_path,
     ) -> None:
         self.algo_client = Algorithmia.client(api_key)
         self.username = username
         self.algo_name = algo_name
         self.model_path = model_path
-        self.algo_dir = self._replace_placeholders(algo_dir)
+        # self.algo_dir = self._replace_placeholders(algo_dir)
         self.workspace_path = workspace_path
 
         self.model_full_path = f"{workspace_path}/{model_path}"
@@ -33,12 +33,19 @@ class AlgorithmiaDeployer:
         #     "ALGORITHMIA_REQUIREMENTS_PATH"
         # ] = f"{self.workspace_path}/{self.algo_name}/requirements.txt"
 
-        os.environ[
-            "ALGORITHMIA_SCRIPT_PATH"
-        ] = f"{self.algo_dir}/src/{self.algo_name}.py"
-        os.environ[
-            "ALGORITHMIA_REQUIREMENTS_PATH"
-        ] = f"{self.algo_dir}/requirements.txt"
+        # os.environ[
+        #     "ALGORITHMIA_SCRIPT_PATH"
+        # ] = f"{self.algo_dir}/src/{self.algo_name}.py"
+        # os.environ[
+        #     "ALGORITHMIA_REQUIREMENTS_PATH"
+        # ] = f"{self.algo_dir}/requirements.txt"
+
+        # os.environ[
+        #     "ALGORITHMIA_SCRIPT_PATH"
+        # ] = f"{self.algo_name}/src/{self.algo_name}.py"
+        # os.environ[
+        #     "ALGORITHMIA_REQUIREMENTS_PATH"
+        # ] = f"{self.algo_name}/requirements.txt"
 
     def check_upload_link_algomodel(
         self, upload_path, commit_SHA, github_repo, commit_msg
@@ -137,7 +144,7 @@ class AlgorithmiaDeployer:
         # TODO: Remove after clarification
         # algo_dir = f"{self.workspace_path}/{self.algo_name}"
         # config_full_path = f"{algo_dir}/{config_rel_path}"
-        config_full_path = f"{self.algo_dir}/{config_rel_path}"
+        config_full_path = f"{self.algo_name}_CI/{config_rel_path}"
 
         config = {}
         if os.path.exists(config_full_path):
