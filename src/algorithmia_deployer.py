@@ -46,8 +46,8 @@ class AlgorithmiaDeployer:
         #     "ALGORITHMIA_REQUIREMENTS_PATH"
         # ] = f"{self.algo_name}/requirements.txt"
 
-    def check_upload_link_algomodel(
-        self, upload_path, commit_SHA, github_repo, commit_msg
+    def upload_and_link_algo_model(
+        self, upload_path, git_repo, git_ref, commit_SHA, commit_msg
     ):
         if os.path.exists(self.model_full_path):
             model_md5_hash = self._calculate_model_md5()
@@ -56,7 +56,8 @@ class AlgorithmiaDeployer:
                 algorithmia_upload_path = self._upload_model(upload_path, commit_SHA)
                 if algorithmia_upload_path:
                     self._update_algo_model_config(
-                        github_repo=github_repo,
+                        git_repo=git_repo,
+                        git_ref=git_ref,
                         commit_SHA=commit_SHA,
                         commit_msg=commit_msg,
                         model_filepath=algorithmia_upload_path,
@@ -133,7 +134,8 @@ class AlgorithmiaDeployer:
 
     def _update_algo_model_config(
         self,
-        github_repo,
+        git_repo,
+        git_ref,
         commit_SHA,
         commit_msg,
         model_filepath,
@@ -154,7 +156,8 @@ class AlgorithmiaDeployer:
         config["model_md5_hash"] = model_md5_hash
         config["model_origin_commit_SHA"] = commit_SHA
         config["model_origin_commit_msg"] = commit_msg
-        config["model_origin_repo"] = github_repo
+        config["model_origin_repo"] = git_repo
+        config["model_origin_ref"] = git_ref
         config["model_uploaded_utc"] = datetime.utcnow().strftime(
             "%Y-%m-%d %H:%M:%S.%f"
         )

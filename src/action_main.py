@@ -7,10 +7,9 @@ import notebook_executor
 
 if __name__ == "__main__":
     workspace = os.getenv("GITHUB_WORKSPACE")
-    github_repo = os.getenv("GITHUB_REPOSITORY")
+    git_repo = os.getenv("GITHUB_REPOSITORY")
+    git_ref = os.getenv("GITHUB_REF")
     commit_SHA = os.getenv("GITHUB_SHA")
-    github_ref = os.getenv("GITHUB_REF")
-    print(f"{github_ref} is GITHUB_REF")
     commit_msg = os.getenv("HEAD_COMMIT_MSG")
     algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY")
     algorithmia_username = os.getenv("INPUT_ALGORITHMIA_USERNAME")
@@ -42,10 +41,11 @@ if __name__ == "__main__":
                 model_path=model_path,
                 workspace_path=workspace,
             )
-            algorithmia_deployer.check_upload_link_algomodel(
+            algorithmia_deployer.upload_and_link_algo_model(
                 upload_path=upload_path,
+                git_repo=git_repo,
+                git_ref=git_ref,
                 commit_SHA=commit_SHA,
-                github_repo=github_repo,
                 commit_msg=commit_msg,
             )
         except Exception as e:
