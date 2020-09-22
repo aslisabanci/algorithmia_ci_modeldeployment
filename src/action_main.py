@@ -9,6 +9,8 @@ if __name__ == "__main__":
     workspace = os.getenv("GITHUB_WORKSPACE")
     github_repo = os.getenv("GITHUB_REPOSITORY")
     commit_SHA = os.getenv("GITHUB_SHA")
+    github_ref = os.getenv("GITHUB_REF")
+    print(f"{github_ref} is GITHUB_REF")
     commit_msg = os.getenv("HEAD_COMMIT_MSG")
     algorithmia_api_key = os.getenv("INPUT_ALGORITHMIA_API_KEY")
     algorithmia_username = os.getenv("INPUT_ALGORITHMIA_USERNAME")
