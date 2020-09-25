@@ -26,24 +26,3 @@ class NotebookExecutor:
             print(
                 f"Notebook file not found at path: {self.notebook_full_path}. Omitting notebook execution step."
             )
-
-
-import nbformat
-from nbconvert import PythonExporter
-
-
-def convertNotebook(notebookPath, modulePath):
-    with open(notebookPath) as nbfile:
-        nb = nbformat.reads(nbfile.read(), nbformat.NO_CONVERT)
-
-    exporter = PythonExporter()
-    source, _ = exporter.from_notebook_node(nb)
-
-    with open(modulePath, "w+") as nbfile:
-        nbfile.writelines(source)
-
-
-convertNotebook(
-    "/Users/aslisabanci/repos/algorithmia_ci/demo_autodeploy_algo_on_algorithmia/demo_algo.ipynb",
-    "/Users/aslisabanci/Desktop/stripped_notebook_algo.py",
-)
