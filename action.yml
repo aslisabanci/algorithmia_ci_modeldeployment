@@ -26,11 +26,11 @@ inputs:
   model_path:
       description: 'Path of the model file to be uploaded to Algorithmia'
       required: true
-      default: 'algorithmia_model.pkl'  
+      default: 'model.pkl'  
   notebook_path:
     description: 'Path of the notebook to be executed by this action'
     required: false
-    default: 'algorithmia_model.ipynb'
+    default: 'model.ipynb'
 runs:
   using: 'docker'
   image: 'Dockerfile'
