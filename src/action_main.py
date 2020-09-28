@@ -18,6 +18,8 @@ if __name__ == "__main__":
     model_path = os.getenv("INPUT_MODEL_PATH")
     upload_path = os.getenv("INPUT_ALGORITHMIA_UPLOADPATH")
 
+    # TODO: Make github host parametric
+
     error_template_str = "Field '{}' not defined in workflow file. Please check your workflow configuration"
     if not algorithmia_api_key:
         raise Exception(error_template_str.format("algorithmia_api_key"))
