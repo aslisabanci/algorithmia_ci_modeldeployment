@@ -6,10 +6,10 @@ pip3 install -r requirements.txt
 # Clone the Algorithmia algorithm repository
 CI_ALGO_DIR=$INPUT_ALGORITHMIA_ALGONAME"_CI"
 
-if [ -z "$ALGORITHMIA_PASSWORD" ]
+if [ -z "$INPUT_ALGORITHMIA_PASSWORD" ]
 then
     echo "Will clone algorithm repository hosted on Github"
-    git clone https://"$GITHUB_PAT"@github.com/aslisabanci/xgboost_automated_github.git $CI_ALGO_DIR
+    git clone https://"$INPUT_GITHUB_PAT"@github.com/"$INPUT_GITHUB_USERNAME"/"$INPUT_ALGORITHMIA_ALGONAME".git $CI_ALGO_DIR
 else
     echo "Will clone algorithm repository hosted on Algorithmia"
     git clone https://"$INPUT_ALGORITHMIA_USERNAME":"$INPUT_ALGORITHMIA_PASSWORD"@git.algorithmia.com/git/"$INPUT_ALGORITHMIA_USERNAME"/"$INPUT_ALGORITHMIA_ALGONAME".git $CI_ALGO_DIR
