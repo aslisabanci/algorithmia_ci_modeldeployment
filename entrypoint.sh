@@ -9,8 +9,7 @@ CI_ALGO_DIR=$INPUT_ALGORITHMIA_ALGONAME"_CI"
 if [ -z "$ALGORITHMIA_PASSWORD" ]
 then
     echo "Will clone algorithm repository hosted on Github"
-    git clone https://"$GITHUB_USERNAME":"$GITHUB_PAT"@github.com/"$GITHUB_USERNAME"/"$ALGORITHMIA_ALGONAME".git $CI_ALGO_DIR
-    
+    git clone https://"$GITHUB_PAT"@github.com/aslisabanci/xgboost_automated_github.git $CI_ALGO_DIR
 else
     echo "Will clone algorithm repository hosted on Algorithmia"
     git clone https://"$INPUT_ALGORITHMIA_USERNAME":"$INPUT_ALGORITHMIA_PASSWORD"@git.algorithmia.com/git/"$INPUT_ALGORITHMIA_USERNAME"/"$INPUT_ALGORITHMIA_ALGONAME".git $CI_ALGO_DIR
