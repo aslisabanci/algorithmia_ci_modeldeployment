@@ -16,7 +16,7 @@ python3 /src/action_main.py
 # Push updates to Algorithmia, and trigger a new algorithm build
 if [ $? -eq 0 ]
 then
-    echo "Successfully executed action script, optionally executing the model notebook and uploading the model file to Algorithmia.\n"
+    echo "Successfully executed action script, optionally executing the model notebook and uploading the model file to Algorithmia."
 
     if ! [ -e $INPUT_ALGORITHMIA_ALGONAME.py ]
     then
@@ -24,6 +24,7 @@ then
         if [ -e $INPUT_ALGORITHMIA_ALGONAME.ipynb ]
         then 
             echo "Found $INPUT_ALGORITHMIA_ALGONAME.ipynb. Will convert this into .py before pushing it to Algorithmia."
+            jupyter nbconvert --to script $INPUT_ALGORITHMIA_ALGONAME.ipynb
         else
             echo "Neither $INPUT_ALGORITHMIA_ALGONAME.ipynb or $INPUT_ALGORITHMIA_ALGONAME.py exist." 
         fi
