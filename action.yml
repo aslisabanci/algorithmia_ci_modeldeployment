@@ -36,7 +36,7 @@ inputs:
   notebook_path:
     description: 'Path of the notebook to be executed by this action'
     required: false
-    default: 'model.ipynb'
+    default: 'model_training.ipynb'
 runs:
   using: 'docker'
   image: 'Dockerfile'
