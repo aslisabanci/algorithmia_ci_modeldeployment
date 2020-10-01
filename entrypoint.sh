@@ -44,6 +44,7 @@ then
     then
         echo "Will copy and push $INPUT_ALGORITHMIA_ALGONAME.py to Algorithm repository."
         cp -R "$INPUT_ALGORITHMIA_ALGONAME.py" $CI_ALGO_DIR/src/
+        cp -R requirements.txt $CI_ALGO_DIR/requirements.txt
     else
         echo "Will not copy any inference code to Algorithmia."
     fi
