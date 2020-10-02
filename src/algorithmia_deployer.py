@@ -159,5 +159,5 @@ class AlgorithmiaDeployer:
             "%Y-%m-%d %H:%M:%S.%f"
         )
 
-        with open(manifest_full_path, "w") as new_manifest_file:
+        with open(manifest_full_path, "w+") as new_manifest_file:
             json.dump(manifest, new_manifest_file)
