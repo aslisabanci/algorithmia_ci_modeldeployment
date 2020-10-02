@@ -55,7 +55,7 @@ class AlgorithmiaDeployer:
                 upload_path = self._replace_placeholders(upload_path)
                 algorithmia_upload_path = self._upload_model(upload_path, commit_SHA)
                 if algorithmia_upload_path:
-                    self._update_algo_model_config(
+                    self._update_algo_model_manifest(
                         git_repo=git_repo,
                         git_ref=git_ref,
                         commit_SHA=commit_SHA,
@@ -132,7 +132,7 @@ class AlgorithmiaDeployer:
             )
         return upload_path
 
-    def _update_algo_model_config(
+    def _update_algo_model_manifest(
         self,
         git_repo,
         git_ref,
@@ -140,27 +140,24 @@ class AlgorithmiaDeployer:
         commit_msg,
         model_filepath,
         model_md5_hash,
-        config_rel_path="model_config.json",
+        manifest_rel_path="model_manifest.json",
     ):
-        # TODO: Remove after clarification
-        # algo_dir = f"{self.workspace_path}/{self.algo_name}"
-        # config_full_path = f"{algo_dir}/{config_rel_path}"
-        config_full_path = f"{self.algo_name}_CI/{config_rel_path}"
+        manifest_full_path = f"{self.algo_name}_CI/{manifest_rel_path}"
 
-        config = {}
-        if os.path.exists(config_full_path):
-            with open(config_full_path, "r") as config_file:
-                config = json.load(config_file)
+        manifest = {}
+        if os.path.exists(manifest_full_path):
+            with open(manifest_full_path, "r") as manifest_file:
+                manifest = json.load(manifest_file)
 
-        config["model_filepath"] = model_filepath
-        config["model_md5_hash"] = model_md5_hash
-        config["model_origin_commit_SHA"] = commit_SHA
-        config["model_origin_commit_msg"] = commit_msg
-        config["model_origin_repo"] = git_repo
-        config["model_origin_ref"] = git_ref
-        config["model_uploaded_utc"] = datetime.utcnow().strftime(
+        manifest["model_filepath"] = model_filepath
+        manifest["model_md5_hash"] = model_md5_hash
+        manifest["model_origin_commit_SHA"] = commit_SHA
+        manifest["model_origin_commit_msg"] = commit_msg
+        manifest["model_origin_repo"] = git_repo
+        manifest["model_origin_ref"] = git_ref
+        manifest["model_uploaded_utc"] = datetime.utcnow().strftime(
             "%Y-%m-%d %H:%M:%S.%f"
         )
 
-        with open(config_full_path, "w") as new_config_file:
-            json.dump(config, new_config_file)
+        with open(manifest_full_path, "w") as new_manifest_file:
+            json.dump(manifest, new_manifest_file)
