@@ -30,13 +30,17 @@ inputs:
     required: true
     default: 'data://$ALGORITHMIA_USERNAME/$ALGORITHMIA_ALGONAME'
   model_path:
-      description: 'Path of the model file to be uploaded to Algorithmia'
-      required: true
-      default: 'model.pkl'  
+    description: 'Path of the model file to be uploaded to Algorithmia'
+    required: true
+    default: 'model.pkl'  
   notebook_path:
     description: 'Path of the notebook to be executed by this action'
     required: false
     default: 'model_training.ipynb'
+  git_host:
+    description: Git host for the Algorithmia algorithm repository. Change to git.algorithmia.com if the algorithm is hosted on Algorithmia.
+    required: false
+    default: 'github.com'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -51,5 +55,6 @@ runs:
     - ${{ inputs.algorithmia_uploadpath }}
     - ${{ inputs.model_path }}
     - ${{ inputs.notebook_path }}
+    - ${{ inputs.git_host }}
     
     
